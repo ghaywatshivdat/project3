@@ -1,0 +1,227 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project 3 | Creative Space</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080808;
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            border-bottom: 1px solid #222;
+            background: rgba(8, 8, 8, 0.9);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 30px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00e5ff;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #00e5ff;
+            filter: blur(150px);
+            opacity: 0.12;
+            right: 10%;
+            top: 20%;
+        }
+
+        .content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            color: #00e5ff;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(50px, 8vw, 100px);
+            line-height: 0.95;
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px #00e5ff;
+        }
+
+        .description {
+            color: #999;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 28px;
+            border: 1px solid #00e5ff;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn.primary {
+            background: #00e5ff;
+            color: #000;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        }
+
+        /* Number */
+        .number {
+            position: absolute;
+            right: 8%;
+            bottom: 8%;
+            font-size: 120px;
+            font-weight: bold;
+            color: #111;
+            user-select: none;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            nav {
+                padding: 0 5%;
+            }
+
+            nav a {
+                margin-left: 12px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 0 5%;
+            }
+
+            h1 {
+                font-size: 55px;
+            }
+
+            .number {
+                font-size: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">PROJECT<span>3</span></div>
+
+        <div>
+            <!-- Partner cha Home page -->
+            <a href="home.html">Home</a>
+
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+
+        <div class="content">
+
+            <div class="tag">Welcome to Project 3</div>
+
+            <h1>
+                BUILD.<br>
+                CREATE.<br>
+                <span>INNOVATE.</span>
+            </h1>
+
+            <p class="description">
+                A collaborative space where ideas become reality.
+                Project 3 is built to explore, create and experiment
+                with something different.
+            </p>
+
+            <div class="buttons">
+
+                <!-- Anchor tag -->
+                <a href="home.html" class="btn primary">
+                    Explore Home →
+                </a>
+
+                <a href="#about" class="btn">
+                    Discover More
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="number">03</div>
+
+    </main>
+
+</body>
+</html>
+```

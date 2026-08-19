@@ -5,168 +5,588 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Project 3 | Creative Space</title>
+    <title>TechHub | Electronics Store</title>
 
     <style>
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            min-height: 100vh;
-            background: #080808;
-            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080a0f;
+            color: #ffffff;
         }
 
-        /* Navigation */
-        nav {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 10, 15, 0.94);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #20242d;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
             height: 75px;
+            padding: 0 25px;
+
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0 8%;
-            border-bottom: 1px solid #222;
-            background: rgba(8, 8, 8, 0.9);
+            justify-content: space-between;
+            gap: 25px;
         }
 
         .logo {
-            font-size: 25px;
-            font-weight: bold;
-            letter-spacing: 2px;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            white-space: nowrap;
         }
 
         .logo span {
             color: #00e5ff;
         }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            margin-left: 30px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #b8bdc8;
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: #00e5ff;
         }
 
-        /* Hero */
+        .cart {
+            padding: 10px 16px;
+            border: 1px solid #303641;
+            border-radius: 8px;
+        }
+
+        .cart:hover {
+            border-color: #00e5ff;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
         .hero {
-            min-height: calc(100vh - 75px);
-            display: flex;
+            min-height: 650px;
+            max-width: 1250px;
+            margin: auto;
+            padding: 80px 25px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
             align-items: center;
-            padding: 0 8%;
-            position: relative;
-            overflow: hidden;
+            gap: 40px;
         }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: #00e5ff;
-            filter: blur(150px);
-            opacity: 0.12;
-            right: 10%;
-            top: 20%;
-        }
-
-        .content {
-            max-width: 750px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tag {
+        .hero-content small {
             color: #00e5ff;
-            font-size: 14px;
-            letter-spacing: 4px;
+            font-weight: bold;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 20px;
         }
 
-        h1 {
-            font-size: clamp(50px, 8vw, 100px);
+        .hero-content h1 {
+            font-size: clamp(50px, 7vw, 90px);
             line-height: 0.95;
-            margin-bottom: 30px;
+            margin: 20px 0;
         }
 
-        h1 span {
-            color: transparent;
-            -webkit-text-stroke: 1px #00e5ff;
+        .hero-content h1 span {
+            color: #00e5ff;
         }
 
-        .description {
-            color: #999;
-            font-size: 18px;
+        .hero-content p {
+            max-width: 580px;
+            color: #8f96a3;
             line-height: 1.7;
-            max-width: 600px;
-            margin-bottom: 40px;
+            font-size: 17px;
         }
 
-        /* Buttons */
-        .buttons {
+        .hero-buttons {
             display: flex;
-            gap: 18px;
+            gap: 15px;
+            margin-top: 35px;
             flex-wrap: wrap;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 28px;
-            border: 1px solid #00e5ff;
-            color: white;
-            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 8px;
             font-weight: bold;
             transition: 0.3s;
         }
 
-        .btn.primary {
+        .btn-primary {
             background: #00e5ff;
-            color: #000;
+            color: #001014;
         }
 
-        .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.25);
         }
 
-        /* Number */
-        .number {
+        .btn-outline {
+            border: 1px solid #343b47;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: #00e5ff;
+            color: #00e5ff;
+        }
+
+        /* =========================
+           HERO PRODUCT
+        ========================= */
+
+        .hero-product {
+            min-height: 430px;
+            border-radius: 25px;
+            border: 1px solid #252b35;
+
+            background:
+                radial-gradient(circle at 50% 40%,
+                rgba(0, 229, 255, 0.16),
+                transparent 55%),
+                #0d1118;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-glow {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: #00e5ff;
+            filter: blur(100px);
+            opacity: 0.15;
             position: absolute;
-            right: 8%;
-            bottom: 8%;
-            font-size: 120px;
-            font-weight: bold;
-            color: #111;
-            user-select: none;
         }
 
-        /* Mobile */
-        @media (max-width: 700px) {
-            nav {
-                padding: 0 5%;
-            }
+        .ps5 {
+            position: relative;
+            width: 145px;
+            height: 300px;
+            border-radius: 35px 8px 8px 35px;
 
-            nav a {
-                margin-left: 12px;
-                font-size: 13px;
+            background: linear-gradient(
+                90deg,
+                #f4f5f7,
+                #cfd3d8,
+                #ffffff
+            );
+
+            transform: skewY(-8deg);
+            box-shadow:
+                20px 20px 45px rgba(0, 0, 0, 0.5),
+                inset -8px 0 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .ps5::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: 20px;
+            width: 8px;
+            height: 260px;
+            background: #171a20;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .ps5-light {
+            position: absolute;
+            width: 4px;
+            height: 190px;
+            background: #00e5ff;
+            left: 25px;
+            top: 55px;
+            box-shadow: 0 0 15px #00e5ff;
+        }
+
+        .hero-label {
+            position: absolute;
+            bottom: 25px;
+            left: 30px;
+            color: #777f8d;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .section {
+            max-width: 1250px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+        }
+
+        .section-title p {
+            color: #747c89;
+            font-size: 14px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            min-height: 150px;
+            padding: 25px 15px;
+            border: 1px solid #242a34;
+            border-radius: 15px;
+            background: #0d1118;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-7px);
+            border-color: #00e5ff;
+            background: #10161e;
+        }
+
+        .category-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            font-size: 16px;
+        }
+
+        .category p {
+            color: #747c89;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        /* =========================
+           FEATURED PRODUCTS
+        ========================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: #0d1118;
+            border: 1px solid #242a34;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #00e5ff;
+        }
+
+        .product-image {
+            height: 210px;
+            background: #11161e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 75px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info small {
+            color: #00e5ff;
+            font-size: 11px;
+        }
+
+        .product-info h3 {
+            margin: 8px 0;
+            font-size: 17px;
+        }
+
+        .product-info p {
+            color: #747c89;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .price-row {
+            margin-top: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .buy-btn {
+            background: #00e5ff;
+            color: #001014;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            background: white;
+        }
+
+        /* =========================
+           DEAL BANNER
+        ========================= */
+
+        .deal {
+            max-width: 1250px;
+            margin: 30px auto 80px;
+            padding: 45px;
+
+            border-radius: 20px;
+            border: 1px solid #24313b;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #10171f,
+                    #071c21
+                );
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .deal h2 {
+            font-size: 38px;
+        }
+
+        .deal h2 span {
+            color: #00e5ff;
+        }
+
+        .deal p {
+            color: #7f8794;
+            margin-top: 10px;
+        }
+
+        .deal-badge {
+            font-size: 55px;
+            font-weight: 900;
+            color: #00e5ff;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #20252e;
+            background: #06080c;
+        }
+
+        .footer-content {
+            max-width: 1250px;
+            margin: auto;
+            padding: 55px 25px;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand p {
+            color: #747c89;
+            max-width: 330px;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #747c89;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #00e5ff;
+        }
+
+        .copyright {
+            border-top: 1px solid #20252e;
+            text-align: center;
+            padding: 20px;
+            color: #59606c;
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                gap: 15px;
             }
 
             .hero {
-                padding: 0 5%;
+                grid-template-columns: 1fr;
+                padding-top: 60px;
             }
 
-            h1 {
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                min-height: 70px;
+            }
+
+            .nav-links a:not(.cart) {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 70px 20px;
+            }
+
+            .hero-content h1 {
                 font-size: 55px;
             }
 
-            .number {
-                font-size: 70px;
+            .hero-product {
+                min-height: 350px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                display: block;
+            }
+
+            .section-title p {
+                margin-top: 8px;
+            }
+
+            .deal {
+                margin: 20px;
+                padding: 30px;
+                display: block;
+            }
+
+            .deal h2 {
+                font-size: 30px;
+            }
+
+            .deal-badge {
+                font-size: 40px;
+                margin-top: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                padding: 45px 20px;
             }
         }
     </style>
@@ -174,53 +594,405 @@
 
 <body>
 
-    <nav>
-        <div class="logo">PROJECT<span>3</span></div>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
 
-        <div>
-            <!-- Partner cha Home page -->
-            <a href="home.html">Home</a>
+    <header>
+        <nav class="navbar">
 
-            <a href="#about">About</a>
-        </div>
-    </nav>
+            <a href="index.html" class="logo">
+                TECH<span>HUB</span>
+            </a>
 
-    <main class="hero">
+            <div class="nav-links">
 
-        <div class="content">
+                <!-- Partner's Home Page -->
+                <a href="home.html">Home</a>
 
-            <div class="tag">Welcome to Project 3</div>
+                <a href="#categories">Categories</a>
+
+                <a href="#products">Products</a>
+
+                <a href="#deals">Deals</a>
+
+                <a href="#contact">Contact</a>
+
+                <a href="#" class="cart">🛒 Cart</a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <small>THE FUTURE OF TECHNOLOGY</small>
 
             <h1>
-                BUILD.<br>
-                CREATE.<br>
-                <span>INNOVATE.</span>
+                Upgrade<br>
+                Your <span>World.</span>
             </h1>
 
-            <p class="description">
-                A collaborative space where ideas become reality.
-                Project 3 is built to explore, create and experiment
-                with something different.
+            <p>
+                Discover powerful laptops, gaming PCs, PlayStation,
+                smartphones and the latest tech accessories —
+                all in one place.
             </p>
 
-            <div class="buttons">
+            <div class="hero-buttons">
 
-                <!-- Anchor tag -->
-                <a href="home.html" class="btn primary">
-                    Explore Home →
+                <a href="#products" class="btn btn-primary">
+                    Shop Products →
                 </a>
 
-                <a href="#about" class="btn">
-                    Discover More
+                <!-- Anchor to partner's Home page -->
+                <a href="home.html" class="btn btn-outline">
+                    Visit Home
                 </a>
 
             </div>
 
         </div>
 
-        <div class="number">03</div>
 
-    </main>
+        <!-- Decorative PS5 -->
+        <div class="hero-product">
+
+            <div class="product-glow"></div>
+
+            <div class="ps5">
+                <div class="ps5-light"></div>
+            </div>
+
+            <div class="hero-label">
+                NEXT-GEN GAMING
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
+
+    <section class="section" id="categories">
+
+        <div class="section-title">
+
+            <div>
+                <h2>Shop by Category</h2>
+                <p>Everything you need for your digital life.</p>
+            </div>
+
+        </div>
+
+
+        <div class="categories">
+
+            <a href="#products" class="category">
+                <div class="category-icon">💻</div>
+                <h3>Laptops</h3>
+                <p>Work & Gaming</p>
+            </a>
+
+            <a href="#products" class="category">
+                <div class="category-icon">🖥️</div>
+                <h3>Computers</h3>
+                <p>Powerful PCs</p>
+            </a>
+
+            <a href="#products" class="category">
+                <div class="category-icon">🎮</div>
+                <h3>Gaming</h3>
+                <p>PS5 & Consoles</p>
+            </a>
+
+            <a href="#products" class="category">
+                <div class="category-icon">📱</div>
+                <h3>Mobiles</h3>
+                <p>Latest Phones</p>
+            </a>
+
+            <a href="#products" class="category">
+                <div class="category-icon">🎧</div>
+                <h3>Accessories</h3>
+                <p>Tech Essentials</p>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRODUCTS
+    ========================== -->
+
+    <section class="section" id="products">
+
+        <div class="section-title">
+
+            <div>
+                <h2>Featured Products</h2>
+                <p>Our hand-picked tech collection.</p>
+            </div>
+
+        </div>
+
+
+        <div class="products">
+
+            <!-- Product 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    💻
+                </div>
+
+                <div class="product-info">
+
+                    <small>LAPTOP</small>
+
+                    <h3>UltraBook Pro 15</h3>
+
+                    <p>
+                        High-performance laptop for work,
+                        study and everyday productivity.
+                    </p>
+
+                    <div class="price-row">
+
+                        <div class="price">
+                            ₹74,999
+                        </div>
+
+                        <button class="buy-btn">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🎮
+                </div>
+
+                <div class="product-info">
+
+                    <small>GAMING</small>
+
+                    <h3>PlayStation 5</h3>
+
+                    <p>
+                        Experience next-generation gaming
+                        with ultra-fast performance.
+                    </p>
+
+                    <div class="price-row">
+
+                        <div class="price">
+                            ₹49,990
+                        </div>
+
+                        <button class="buy-btn">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    📱
+                </div>
+
+                <div class="product-info">
+
+                    <small>SMARTPHONE</small>
+
+                    <h3>Nova X Pro</h3>
+
+                    <p>
+                        Powerful processor, amazing camera
+                        and a stunning display.
+                    </p>
+
+                    <div class="price-row">
+
+                        <div class="price">
+                            ₹39,999
+                        </div>
+
+                        <button class="buy-btn">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🖥️
+                </div>
+
+                <div class="product-info">
+
+                    <small>DESKTOP</small>
+
+                    <h3>TechHub Gaming PC</h3>
+
+                    <p>
+                        Built for gaming, editing and
+                        high-performance computing.
+                    </p>
+
+                    <div class="price-row">
+
+                        <div class="price">
+                            ₹89,999
+                        </div>
+
+                        <button class="buy-btn">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DEAL SECTION
+    ========================== -->
+
+    <section class="deal" id="deals">
+
+        <div>
+
+            <h2>
+                Power Up Your Setup.
+                <span>Save More.</span>
+            </h2>
+
+            <p>
+                Exclusive deals on selected electronics.
+                Limited-time offers available now.
+            </p>
+
+        </div>
+
+        <div class="deal-badge">
+            -30%
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer id="contact">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    TECH<span>HUB</span>
+                </div>
+
+                <p>
+                    Your destination for computers,
+                    gaming, smartphones, laptops and
+                    the latest technology.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Shop</h3>
+
+                <a href="#products">Laptops</a>
+                <a href="#products">Computers</a>
+                <a href="#products">Gaming</a>
+                <a href="#products">Mobiles</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Company</h3>
+
+                <a href="home.html">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#deals">Deals</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Support</h3>
+
+                <a href="#">Help Center</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">Privacy</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+            © 2026 TechHub. All Rights Reserved.
+        </div>
+
+    </footer>
 
 </body>
 </html>
